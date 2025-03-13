@@ -20,8 +20,8 @@ export class EmployeesHTTPService {
   #createHttpParams(criteria: EmployeeCriteria, page: number, pageSize: number) {
     return new HttpParams({
       fromObject: { ...criteria,
-        _limit: pageSize,
-        _page: page,
+        pageSize: pageSize,
+        page: page,
       }
     })
   }
@@ -51,9 +51,9 @@ export class EmployeesHTTPService {
   }
 
   async fetchEmployees(criteria: EmployeeCriteria = {}, page: number = 1, pageSize = 50) {
-    const query = new URLSearchParams({ ...criteria, 
-      _limit: pageSize.toString(),
-      _page: page.toString()
+    const query = new URLSearchParams({ ...criteria,
+      pageSize: pageSize.toString(),
+      page: page.toString()
     }).toString()
     const response = await fetch(`${apiURL}/employees?${query}`)
     return response.json() as Promise<Employee[]>

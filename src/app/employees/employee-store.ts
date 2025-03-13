@@ -20,7 +20,12 @@ const initialState: EmployeeState = {
   }
 }
 
+/**
+ * EmployeeStore can be provided in the root module, a specific module, a component, a route or a service.
+ * This makes it available for dependency injection where needed.
+ */
 export const EmployeeStore = signalStore(
+  //{ providedIn: 'root' },
   withState(initialState)
   //withA(),
   //withB(),

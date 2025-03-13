@@ -7,6 +7,7 @@ import { EmployeesHTTPService } from './employeesHTTP.service';
 import { NameAndTitlePipe } from './name-and-title.pipe';
 import { FlagPipe } from './flag.pipe';
 import { LoaderComponent } from '../loader.component';
+import { EmployeeStore } from './employee-store';
 
 @Component({
   selector: 'employee-listing',
@@ -41,12 +42,14 @@ import { LoaderComponent } from '../loader.component';
 })
 export class EmployeeListingComponent {
 
+  store = inject(EmployeeStore)
+
   employees$!: Observable<Employee[]>
   #employeeHTTP = inject(EmployeesHTTPService)
-  
+
   isLoading = true
   error: Error | null = null
-  
+
   ngOnInit() {
     this.employees$ = this.#employeeHTTP.getEmployees().pipe(
       tap(() => {

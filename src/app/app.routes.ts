@@ -4,6 +4,7 @@ import { EmployeePageComponent } from './employees/employee-page.component';
 import { EmployeeListingComponent } from './employees/employee-listing.component';
 import { EmployeeDetailsComponent } from './employees/employee-details.component';
 import { EmployeeDetailsResolver } from './employees/employee-details.resolver';
+import { EmployeeStore } from './employees/employee-store';
 
 export const routes: Routes = [
   {
@@ -13,6 +14,7 @@ export const routes: Routes = [
   {
     path: 'employees',
     component: EmployeePageComponent,
+    //providers: [EmployeeStore],
     children: [
       {
         path: ':id',
