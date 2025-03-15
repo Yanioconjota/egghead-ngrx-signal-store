@@ -1,5 +1,6 @@
 import { signalStore, withState } from '@ngrx/signals';
 import { Employee } from '../model';
+import { mockEmployees } from './employee.mocks';
 
 type EmployeeState = {
   items: Employee[]
@@ -10,7 +11,7 @@ type EmployeeState = {
 }
 
 const initialState: EmployeeState = {
-  items: [],
+  items: mockEmployees,
   filters: {
     name: '',
     salary: {

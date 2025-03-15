@@ -24,7 +24,9 @@ import { EmployeeStore } from './employee-store';
 @if(isLoading) {
   <loader />
 }
-@if (employees$ | async; as employees) {
+<!-- @if (employees$ | async; as employees) -->
+<!-- Instead of using async pipe, we can use the following syntax: -->
+@if (store.items(); as employees) {
   <div>
     count: {{ employees.length }}
     <ul>
@@ -62,8 +64,5 @@ export class EmployeeListingComponent {
         return NEVER;
       })
     )
-    // this.employees$ = this.employeeHTTP.getEmployees({ nationality: "PL" })
-    // this.employees$ = this.employeeHTTP.getEmployees({ office_like: "Poland" })
-    // this.employees$ = this.employeeHTTP.getEmployees({ office_like: "Łódź" })
   }
 }
