@@ -4,6 +4,8 @@ import { mockEmployees } from './employee.mocks';
 
 type EmployeeState = {
   items: Employee[]
+  isLoading: boolean
+  error: Error | null
   filters: {
     name: string,
     salary: Record <'from' | 'to', number>
@@ -12,6 +14,8 @@ type EmployeeState = {
 
 const initialState: EmployeeState = {
   items: mockEmployees,
+  isLoading: false,
+  error: null,
   filters: {
     name: '',
     salary: {

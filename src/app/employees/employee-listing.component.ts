@@ -18,38 +18,42 @@ import { EmployeeStore } from './employee-store';
     NameAndTitlePipe,
     FlagPipe,
     LoaderComponent,
-],
+  ],
   // providers: [ EmployeesStore ],
   template: `
-@if(isLoading) {
-  <loader />
-}
-<!-- @if (employees$ | async; as employees) -->
-<!-- Instead of using async pipe, we can use the following syntax: -->
-@if (store.items(); as employees) {
-  <div>
-    count: {{ employees.length }}
-    <ul>
-      @for (e of employees; track e) {
+    <p>isLoading: {{ store.isLoading() | json }}</p>
+    <p>error: {{ store.error() | json }}</p>
+    @if(store.isLoading()) {
+    <loader />
+    }
+    <!-- @if (employees$ | async; as employees) -->
+    <!-- Instead of using async pipe, we can use the following syntax: -->
+    @if (store.items(); as employees) {
+    <div>
+      count: {{ employees.length }}
+      <ul>
+        @for (e of employees; track e) {
         <li>
-          {{ e | nameAndTitle }} {{ e | flag }}
-          (<a routerLink="/employees/{{ e.id }}" routerLinkActive="active">details</a>)
+          {{ e | nameAndTitle }} {{ e | flag }} (<a
+            routerLink="/employees/{{ e.id }}"
+            routerLinkActive="active"
+            >details</a
+          >)
         </li>
-      }
-    </ul>
-  </div>
-}
+        }
+      </ul>
+    </div>
+    }
   `,
-  styles: [``]
+  styles: [``],
 })
 export class EmployeeListingComponent {
+  store = inject(EmployeeStore);
 
-  store = inject(EmployeeStore)
+  employees$!: Observable<Employee[]>;
+  #employeeHTTP = inject(EmployeesHTTPService);
 
-  employees$!: Observable<Employee[]>
-  #employeeHTTP = inject(EmployeesHTTPService)
-
-  isLoading = true
+  /* isLoading = true
   error: Error | null = null
 
   ngOnInit() {
@@ -64,5 +68,5 @@ export class EmployeeListingComponent {
         return NEVER;
       })
     )
-  }
+  } */
 }
