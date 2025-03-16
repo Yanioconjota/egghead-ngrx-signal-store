@@ -30,7 +30,8 @@ import { EmployeeStore } from './employee-store';
     <!-- Instead of using async pipe, we can use the following syntax: -->
     @if (store.items(); as employees) {
     <div>
-      count: {{ employees.length }}
+      <!-- count: {{ employees.length }} Can be replaced with store.count() -->
+      count: {{ store.count() }}
       <ul>
         @for (e of employees; track e) {
         <li>
